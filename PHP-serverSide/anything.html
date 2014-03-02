@@ -1,0 +1,226 @@
+<?php
+$lon = $_POST["lon"];
+$lat = $_POST["lat"];
+?>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>WEBSITESSSSSS</title>
+		<script src="jquery-1.11.0.js"></script>
+		<script>
+			// ==ClosureCompiler==
+			// @output_file_name default.js
+			// @compilation_level SIMPLE_OPTIMIZATIONS
+			// ==/ClosureCompiler==
+
+			//"use strict";		//bad? badda? badder? baa?
+			//...sheep?
+
+			/*
+				Please note: everything in this file works.
+				You may call isPeak with an x and y coord (corresponding
+				to the actual position on the map).
+			*/
+			
+			function start(latitude, longitude)
+			{
+			
+				unicorns = latitude;
+				dragons = longitude;
+			
+				//mapData;
+				bottomLeft= [0, 0];
+				//topLeft;
+				//topRight;
+				
+				$.getJSON("bsCorner.json", function( data ){	//data is json obj
+					$.each( data, function( key, val ) {
+						if(key == "bottomLeft")
+						{
+							bottomLeft = val;
+						}
+						else if (key == "topLeft")
+						{
+							topLeft = val;	
+						}
+						else if (key == "topRight")
+						{
+							topRight = val;
+						}
+						else if(key == "elevationArray")
+						{
+							mapData = val;
+							init();
+						}
+					} 
+				)});
+			}
+
+			function peakTest()
+			{
+			
+			numPeaks = 0;
+				for(p = 0; p < 262; p++)
+				{
+					for(q = 0; q < 262; q++)
+					{
+						if(isPeak(p, q) == true)
+							numPeaks++;
+						
+					}
+				}
+			document.write("The number of peaks peaked at: " + numPeaks);
+			}
+			
+			function init()
+			{
+				
+				tLLat = topLeft[0];
+				tLLon = topLeft[1];
+
+				mapH = Math.abs(topLeft[1] - bottomLeft[1]);
+				//alert(mapH + "hue");
+				mapW = Math.abs(topLeft[0] - topRight[0]);
+				//alert(mapW + "woah");
+
+				pixelW = 263;		//264 - 1
+				pixelH = 263;
+
+				LON_TO_PIXEL = Math.abs(mapH/263);	
+				LAT_TO_PIXEL = Math.abs(mapW/263);
+				//tester();
+				//getHeight(0,0);
+				
+				someX = lonToX(xDist(unicorns));
+				someY = latToY(yDist(dragons));
+				
+				//alert(someX + ", " + someY);
+				
+				//alert(Math.floor(someX) + ", " + Math.floor(someY));
+				
+				//getHeight(Math.floor(someX), Math.floor(someY));
+				
+				peakTest();
+				//document.write(isPeak(56.1, -129.2 ));
+				
+			}
+
+			//function isPeak(lon, lat) {
+			function isPeak(x, y) {	
+				//x is lon
+				//x = Math.floor(lonToX(xDist(lon)));
+				//y is lat
+				//y = Math.floor(latToY(yDist(lat)));
+				
+				tol = 2;
+				
+				check = mapData[x][y];
+				
+				for (i = 1; i <= tol; i ++) {
+					isAPeak = true;
+					if (x+i < pixelH) {
+						if (mapData[x+i][y] > check || (i == tol && mapData[x+i][y] == check))
+							return false;
+						else if (mapData[x+i][y] < check)
+							isAPeak = isAPeak && true;
+						else
+							isAPeak = isAPeak && false;
+					}
+					if (y+i < pixelW) {
+						if (mapData[x][y+i] > check || (i == tol && mapData[x][y+i] == check))
+							return false;
+						else if (mapData[x][y+i] < check)
+							isAPeak = isAPeak && true;
+						else
+							isAPeak = isAPeak && false;
+					}
+					if (x+i < pixelH && y+i < pixelW) {
+						if (mapData[x+i][y+i] > check || (i == tol && mapData[x+i][y=i] == check))
+							return false;
+						else if (mapData[x+i][y+i] < check)
+							isAPeak = isAPeak && true;
+						else
+							isAPeak = isAPeak && false;
+					}
+						
+					if (x-i >= 0) {
+						if (mapData[x-i][y] > check || (i == tol && mapData[x-i][y] == check))
+							return false;
+						else if (mapData[x-i][y] < check)
+							isAPeak = isAPeak && true;
+						else
+							isAPeak = isAPeak && false;
+					}
+					if (y-i >= 0) {
+						if (mapData[x][y-i] > check || (i == tol && mapData[x][y-i] == check))
+							return false;
+						else if (mapData[x][y-i] < check)
+							isAPeak = isAPeak && true;
+						else
+							isAPeak = isAPeak && false;
+					}
+					if (x-i >= 0 && y-i >= 0) {
+						if (mapData[x-i][y-i] > check || (i == tol && mapData[x-i][y-i] == check))
+							return false;
+						else if (mapData[x-i][y-i] < check)
+							isAPeak = isAPeak && true;
+						else
+							isAPeak = isAPeak && false;
+					}
+					
+					if(isAPeak) return true;
+					
+				}
+				
+				return true;
+			}
+
+			
+			
+			
+			function tester()
+			{
+				alert(mapData[0][0]);
+			}
+			
+			function lonToX(lonDist)
+			{
+				pixelDiff = lonDist/LON_TO_PIXEL;
+				
+				return pixelDiff;
+			}
+
+			function latToY(latDist)
+			{
+				pixelDiff = latDist/LAT_TO_PIXEL;
+				return pixelDiff;
+			}
+
+			function yDist(latPos)
+			{
+				dist = Math.abs(latPos - tLLat);
+				//alert("yDist Test: " + dist);
+				if(dist > 0.5) dist = -1;		//dummy val cause u dumb lol
+
+				return dist;
+			}
+
+			function xDist(lonPos)
+			{
+				dist = Math.abs(lonPos - tLLon);
+
+				if(dist > 0.25) dist = -1;		//u no u dumb bro, lol.
+
+				return dist;
+			}
+			
+			function getHeight(x1, y1)
+			{
+				document.write(mapData[x1][y1]);
+			}
+					
+		</script>
+	</head> 
+	<body onload="start(<?php echo($lon.",".$lat); ?>)">
+	</body>
+</html>

@@ -1,0 +1,217 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.app.MainActivity$PlaceholderFragment">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:id="@+id/login"
+        android:textColor="#fffff9ec"
+        android:textStyle="bold"
+        android:textSize="14pt"
+        android:background="@drawable/button_custom"
+        android:onClick="attemptLogin"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/registerpage"
+        android:textColor="#fffff9ec"
+        android:textStyle="bold"
+        android:textSize="10pt"
+        android:background="@drawable/corner_button_custom"
+        android:onClick="register"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Username"
+        android:height="30dp"
+        android:paddingLeft="10dp"
+        android:width="250dp"
+        android:layout_marginBottom="26dp"
+        android:layout_above="@+id/password"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:hint="Password"
+        android:password="true"
+        android:background="@drawable/rounded_edittext"
+        android:height="30dp"
+        android:width="250dp"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="32dp"
+        android:layout_above="@+id/login"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/aboutButton"
+        android:background="@drawable/button_default"
+        android:text="About"
+        android:onClick="aboutPage"
+        android:textColor="#fff9ec"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/login"
+        android:layout_alignStart="@+id/login"
+        android:layout_marginBottom="38dp"
+        android:enabled="true"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible"
+        android:id="@+id/registerPage">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/smokescreen"
+            android:layout_gravity="center"
+            android:src="@drawable/black"
+            android:visibility="visible"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:src="@drawable/boring"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/newUser"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Enter Username"
+            android:height="30dp"
+            android:paddingLeft="10dp"
+            android:width="250dp"
+            android:layout_marginBottom="54dp"
+            android:layout_above="@+id/newPass"
+            android:layout_alignLeft="@+id/newPass"
+            android:layout_alignStart="@+id/newPass" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/newPass"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_edittext"
+            android:height="30dp"
+            android:hint="Enter a password"
+            android:paddingLeft="10dp"
+            android:width="250dp"
+            android:password="true"
+            android:layout_above="@+id/passConfirm"
+            android:layout_alignLeft="@+id/passConfirm"
+            android:layout_alignStart="@+id/passConfirm"
+            android:layout_marginBottom="53dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/passConfirm"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_edittext"
+            android:height="30dp"
+            android:hint="Confirm Password"
+            android:password="true"
+            android:paddingLeft="10dp"
+            android:width="250dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:id="@+id/signup"
+            android:background="@drawable/button_default"
+            android:onClick="signUp"
+            android:textColor="#fffff9ec"
+            android:layout_marginTop="55dp"
+            android:textStyle="bold"
+            android:enabled="true"
+            android:clickable="true"
+            android:layout_below="@+id/passConfirm"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Return to login"
+            android:id="@+id/goBack"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="false"
+            android:background="@drawable/button_default_2"
+            android:onClick="closeBlack"
+            android:textColor="#fffff9ec"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/black">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:src="@drawable/schpiel"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="fitCenter" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:id="@+id/back"
+                android:background="@drawable/button_default"
+                android:onClick="returnToLogin"
+                android:textColor="#fff9ec"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="false"
+                android:layout_centerHorizontal="true"
+                android:layout_alignBottom="@+id/imageView" />
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

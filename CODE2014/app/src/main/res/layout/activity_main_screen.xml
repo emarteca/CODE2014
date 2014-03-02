@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.app.MainScreen$PlaceholderFragment">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.MapFragment"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Claim Unclaimed Peak"
+        android:id="@+id/claimUnclaimed"
+        android:textColor="#fffff9ec"
+        android:textStyle="bold"
+        android:textSize="14pt"
+        android:background="@drawable/button_custom"
+        android:onClick="claimUnclaimed"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Claim Peak"
+        android:id="@+id/claimClaimed"
+        android:textColor="#fffff9ec"
+        android:textStyle="bold"
+        android:textSize="14pt"
+        android:background="@drawable/button_custom"
+        android:onClick="claimClaimed"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+</RelativeLayout>
